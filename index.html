@@ -14,6 +14,8 @@
     }
 
     #app {
+      max-width: 400px;
+      max-height: 700px;
       width: 100vw;
       height: 100vh;
       background: url('./images/bg.jpg');
@@ -33,27 +35,41 @@
     }
 
     .desc {
-      font-size: 14px;
+      font-size: 16px;
       margin: 0 10px;
       line-height: 24px;
+    }
+
+    .btn {
+      width: 100px;
+      margin-top: 30px;
+      text-align: center;
+      padding: 10px 20px;
+      border-radius: 4px;
+      background: #F29200;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
-  <div id="app">
-    <div>
-      <div class="name">
-        {{fan.name}}
-      </div>
+  <div class="box">
+    <div id="app">
       <div>
-        <img :src="'./images/'+fan.img" />
-      </div>
-      <div class="desc">
-        {{fan.desc}}
+        <div class="name">
+          {{fan.name}}
+        </div>
+        <div>
+          <img :src="'./images/'+fan.img" />
+        </div>
+        <div class="desc">
+          {{fan.desc}}
+        </div>
+        <div class="btn" @click="getFan">给大爷换一个</div>
       </div>
     </div>
-
   </div>
   <script>
     var app = new Vue({
@@ -92,16 +108,21 @@
         ]
       },
       mounted() {
-        const randomNum = (Min, Max) => {
-          var Range = Max - Min;
+        this.getFan()
+      },
+      methods: {
+        getFan() {
+          const randomNum = (Min, Max) => {
+            var Range = Max - Min;
 
-          var Rand = Math.random();
+            var Rand = Math.random();
 
-          var num = Min + Math.floor(Rand * Range); //舍去
+            var num = Min + Math.floor(Rand * Range); //舍去
 
-          return num;
+            return num;
+          }
+          this.fan = this.fans[randomNum(0, 24)]
         }
-        this.fan = this.fans[randomNum(0, 24)]
       }
     })
   </script>
