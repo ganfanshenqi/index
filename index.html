@@ -13,11 +13,17 @@
       color: #fff;
     }
 
-    #app {
-      max-width: 400px;
-      max-height: 700px;
+    .box {
       width: 100vw;
       height: 100vh;
+      max-width: 400px;
+      max-height: 700px;
+      position: relative;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
       background: url('./images/bg.jpg');
       background-size: cover;
       background-position: 100% 100%;
@@ -28,6 +34,10 @@
       font-size: 24px;
       font-weight: bold;
       text-align: center;
+    }
+
+    .name i {
+      color: #ffe602;
     }
 
     img {
@@ -51,6 +61,27 @@
       cursor: pointer;
       font-size: 14px;
     }
+
+    .modal {
+      background: #F29200;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .tip {
+      margin: 60px auto;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .tip i {
+      font-size: 30px;
+      font-weight: bold;
+      color: #FCE4BA
+    }
   </style>
 </head>
 
@@ -59,7 +90,7 @@
     <div id="app">
       <div>
         <div class="name">
-          {{fan.name}}
+          今天干:<i> {{fan.name}}</i>
         </div>
         <div>
           <img :src="'./images/'+fan.img" />
@@ -68,6 +99,12 @@
           {{fan.desc}}
         </div>
         <div class="btn" @click="getFan">给大爷换一个</div>
+      </div>
+      <div class='modal' v-if="loading">
+        <div class="tip"><i>大爷，请稍等~~</i></div>
+        <div>
+          <img src="./images/chou.gif" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -80,8 +117,9 @@
           desc: '',
           img: ''
         },
+        loading: false,
         fans: [
-          { name: '西红柿盖浇饭', desc: 'emmm....,大侠好运气，看着味道不错', img: '1.jpg' },
+          { name: '西红柿鸡蛋盖浇饭', desc: 'emmm....,大侠好运气，看着味道不错', img: '1.jpg' },
           { name: '油泼面', desc: '油一泼，滋啦啦滋啦滋啦，多来点醋，剥一瓣蒜，香！', img: '2.jpg' },
           { name: '冒菜', desc: '大侠，身体缺维A,B,C,D...,不管缺啥，一盆冒菜全补了，十全大补汤啊！', img: '3.jpg' },
           { name: '肉夹馍', desc: '肉夹馍，emmmm???馍夹肉,emmmmm?管他啦，要不来两个，叠起来吃，肉夹馍，馍夹肉都有了。', img: '4.jpg' },
@@ -103,7 +141,7 @@
           { name: '汉堡', desc: '你得考虑一下，里面夹什么肉。', img: '20.jpg' },
           { name: '炸鸡', desc: 'emmmm,虽然你不是正经餐，但你命中该有的', img: '21.jpg' },
           { name: '沙拉', desc: '摸摸自己的肥肉，减肥吧', img: '22.jpg' },
-          { name: '螺蛳粉', desc: '臭是真的臭，香不香你自己尝尝就知道了', img: '23.jpg' },
+          { name: '螺蛳粉', desc: '闻着臭，吃着香不香只有你自己尝了', img: '23.jpg' },
           { name: '西北风', desc: '骚年，摸摸兜，确实空的话，面朝西，嘴张大。', img: '24.jpg' }
         ]
       },
@@ -112,16 +150,17 @@
       },
       methods: {
         getFan() {
+          this.loading = true
           const randomNum = (Min, Max) => {
             var Range = Max - Min;
-
             var Rand = Math.random();
-
             var num = Min + Math.floor(Rand * Range); //舍去
-
             return num;
           }
           this.fan = this.fans[randomNum(0, 24)]
+          setTimeout(() => {
+            this.loading = false
+          }, 2000)
         }
       }
     })
