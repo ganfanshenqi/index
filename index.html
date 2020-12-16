@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>干饭</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    * {
+      margin: 0 auto;
+      padding: 0;
+      color: #fff;
+    }
+
+    #app {
+      width: 100vw;
+      height: 100vh;
+      background: url('./images/bg.jpg');
+      background-size: cover;
+      background-position: 100% 100%;
+    }
+
+    .name {
+      line-height: 60px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .desc {
+      font-size: 14px;
+      margin: 0 10px;
+      line-height: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <div class="name">
+        {{fan.name}}
+      </div>
+      <div>
+        <img :src="'./images/'+fan.img" />
+      </div>
+      <div class="desc">
+        {{fan.desc}}
+      </div>
+    </div>
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        fan: {
+          name: '',
+          desc: '',
+          img: ''
+        },
+        fans: [
+          { name: '西红柿盖浇饭', desc: 'emmm....,大侠好运气，看着味道不错', img: '1.jpg' },
+          { name: '油泼面', desc: '油一泼，滋啦啦滋啦滋啦，多来点醋，剥一瓣蒜，香！', img: '2.jpg' },
+          { name: '冒菜', desc: '大侠，身体缺维A,B,C,D...,不管缺啥，一盆冒菜全补了，十全大补汤啊！', img: '3.jpg' },
+          { name: '肉夹馍', desc: '肉夹馍，emmmm???馍夹肉,emmmmm?管他啦，要不来两个，叠起来吃，肉夹馍，馍夹肉都有了。', img: '4.jpg' },
+          { name: '煮馍', desc: '馍馍掰碎点，易于消化哦~', img: '5.jpg' },
+          { name: '黄焖鸡', desc: '几个小时前那只鸡还在阳光下快乐的奔跑', img: '6.jpg' },
+          { name: '石锅拌饭', desc: '记得先吃下面的锅巴米饭，脆香脆香的呦', img: '7.jpg' },
+          { name: '大盘鸡', desc: '盘它，让它知道你的厉害', img: '8.jpg' },
+          { name: '屁', desc: '骚年，你今天可能口味有点独特，也不知道你能及时吃到不。咦~', img: '9.jpg' },
+          { name: '凉皮', desc: '看来你内心比较火热，来碗凉皮冷静一下。啥，你吃炒凉皮，那你热着吧~', img: '10.jpg' },
+          { name: '牛肉面', desc: '少来点牛肉，免得牛受重伤~', img: '11.jpg' },
+          { name: '酸辣粉', desc: '记得给自己配一杯可乐哦', img: '12.jpg' },
+          { name: '米线', desc: '虽然味道淡点，但确实香啊~', img: '13.jpg' },
+          { name: '饺子', desc: '韭菜鸡蛋的？白菜猪肉的？香菇的？芹菜的？萝卜的？韭黄的？牛肉的？酸菜......自己纠结去吧。哈哈哈哈。不行，就韭菜鸡蛋呗，还补肾，nice。', img: '14.jpg' },
+          { name: '香锅', desc: '偷偷告诉你，撒把花生米更香哦~，一般人我不告诉他', img: '15.jpg' },
+          { name: '炒河粉', desc: '虽然有点油，但是炒出来香呐~', img: '16.jpg' },
+          { name: '炒饭', desc: '隔夜米饭，炒出来更香哦~', img: '17.jpg' },
+          { name: '泡面', desc: '穷的话，就拿袋子泡吧~富有的话，记得泡面不健康，加点人参，', img: '18.jpg' },
+          { name: '一杯水', desc: '比隔壁强点，隔壁抽到了屁，很担心他吃不到，还得饿肚子。', img: '19.jpg' },
+          { name: '汉堡', desc: '你得考虑一下，里面夹什么肉。', img: '20.jpg' },
+          { name: '炸鸡', desc: 'emmmm,虽然你不是正经餐，但你命中该有的', img: '21.jpg' },
+          { name: '沙拉', desc: '摸摸自己的肥肉，减肥吧', img: '22.jpg' },
+          { name: '螺蛳粉', desc: '臭是真的臭，香不香你自己尝尝就知道了', img: '23.jpg' },
+          { name: '西北风', desc: '骚年，摸摸兜，确实空的话，面朝西，嘴张大。', img: '24.jpg' }
+        ]
+      },
+      mounted() {
+        const randomNum = (Min, Max) => {
+          var Range = Max - Min;
+
+          var Rand = Math.random();
+
+          var num = Min + Math.floor(Rand * Range); //舍去
+
+          return num;
+        }
+        this.fan = this.fans[randomNum(0, 24)]
+      }
+    })
+  </script>
+</body>
+
+</html>
